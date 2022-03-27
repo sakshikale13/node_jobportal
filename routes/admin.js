@@ -9,9 +9,10 @@ router.post("/login", async(req, res)=>{
     let body = req.body;
     console.log(body)
 
-    let admin = await Admin.find().and([{email: body.data.email}, {password: body.data.password}]);
+    // let admin = await Admin.find().and([{email: body.data.email}, {password: body.data.password}]);
+    let admin= await Admin.find().and([{email: body.data.email},{password:body.data.password}]);
     console.log(body);
-    console.log(admin);
+    console.log(data);
 
     let data = {
         "data":
@@ -30,6 +31,7 @@ router.post("/login", async(req, res)=>{
             "data":
             {
                 "status":"success",
+                "id":admin._id,
                 "name":admin.name,
                 "email":admin.email,
                 "authkey":authkey

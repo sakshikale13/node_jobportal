@@ -7,10 +7,10 @@ const mongoose = require("mongoose");
 var app = express();
 
 
-app.use(body.json({ limit: '50mb' }));
-app.use(body.urlencoded({ limit: '50mb', extended: true }));
-app.use(express.json());
-app.use(express.static('public'));
+// app.use(body.json({ limit: '50mb' }));
+// app.use(body.urlencoded({ limit: '50mb', extended: true }));
+// app.use(express.json());
+// app.use(express.static('public'));
 
 
 
@@ -23,7 +23,7 @@ db.on("open", () => console.log("Connection Established"));
 app.use((req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "*");
-//res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
+res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
     if (req.method == "OPTIONS") {
         res.header("Access-Control-Allow-Methods", 'POST, GET, PUT, PATCH, DELETE');
         return res.status(200).json({});
@@ -41,5 +41,7 @@ app.get("/", function(req, res) {
 
 
 app.use("/admin",require("./routes/admin"));
+app.use("/openings",require("./routes/openings"));
+app.use("/companies",require("./routes/companies"));
 
 
